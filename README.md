@@ -14,7 +14,7 @@ Navicat for Mysql可视化软件等。<br/>
 <br/>
 
 技术：<br/>
-采用Java EE的SSH框架，基本的CURD操作和传参数,前端使用Jquery<br/>
+采用Java EE的SSH框架，基本的CURD操作和传参数,前端使用Jquery。<br/>
 
 <br/>
 
