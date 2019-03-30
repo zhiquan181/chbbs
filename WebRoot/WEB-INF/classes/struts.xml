@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.objectFactory" value="spring" />
+	<!-- 使用国际编码UTF-8，防止提交表单乱码 -->
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+	
+	<package name="struts" namespace="/" extends="struts-default">
+		<!-- 全局设置错误页面 -->
+		<global-results>
+			<result name="error">/error.jsp</result>
+		</global-results>
+		
+		<!-- 跳转后台登录页面 -->
+		<action name="adminRedirect" class="adminAction" method="adminRedirect">
+			<result name="success">/WEB-INF/admin/admin.jsp</result>
+		</action>
+		
+		<!-- 图片验证码 -->
+		<action name="createImage" class="createImageAction" method="createImage">
+			<result name="success" type="stream">
+				<param name="contentType">image/jpeg</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		
+		<!-- 跳转后台登陆成功页面 -->
+		<action name="adminManager" class="adminAction" method="adminManager">
+			<result name="success">/WEB-INF/admin/index.jsp</result>
+		</action>
+		
+		<!-- 后台登录 -->
+		<action name="alogin" class="adminAction" method="dologin">
+			<result name="success" type="redirectAction">adminManager</result>
+			<result name="error" type="redirectAction">adminRedirect</result>
+		</action>
+		
+		<!-- 后台注销 -->
+		<action name="alogout" class="adminAction" method="dologout">
+			<result name="success">/WEB-INF/admin/admin.jsp</result>
+		</action>
+		
+		<!-- 系统管理员分页列表 -->
+		<action name="auserListPaging" class="adminAction" method="auserListPaging">
+			<result name="success">/WEB-INF/admin/auser_list.jsp</result>
+		</action>
+		
+		<!-- 系统管理员新增编辑 -->
+		<action name="auserInsertEdit" class="adminAction" method="auserInsertEdit">
+			<result name="success">/WEB-INF/admin/auser_insertEdit.jsp</result>
+		</action>
+		
+		<!-- 系统管理员新增 -->
+		<action name="auserInsert" class="adminAction" method="auserInsert">
+			<result name="success" type="redirectAction">auserListPaging</result>
+		</action>
+		
+		<!-- 系统管理员删除 -->
+		<action name="auserDelete" class="adminAction" method="auserDelete">
+			<result name="success" type="redirectAction">auserListPaging</result>
+		</action>
+		
+		<!-- 系统管理员修改编辑 -->
+		<action name="auserUpdateEdit" class="adminAction" method="auserUpdateEdit">
+			<result name="success">/WEB-INF/admin/auser_updateEdit.jsp</result>
+		</action>
+		
+		<!-- 系统管理员修改 -->
+		<action name="auserUpdate" class="adminAction" method="auserUpdate">
+			<result name="success" type="redirectAction">auserListPaging</result>
+		</action>
+		
+		<!-- 系统管理员查询 -->
+		<action name="auserQuery" class="adminAction" method="auserQuery">
+			<result name="success">/WEB-INF/admin/auser_query.jsp</result>
+		</action>
+		
+		<!-- 友情链接分页列表 -->
+		<action name="linkListPaging" class="linkAction" method="linkListPaging">
+			<result name="success">/WEB-INF/admin/link_list.jsp</result>
+		</action>
+		
+		<!-- 友情链接新增编辑 -->
+		<action name="linkInsertEdit" class="linkAction" method="linkInsertEdit">
+			<result name="success">/WEB-INF/admin/link_insertEdit.jsp</result>
+		</action>
+		
+		<!-- 友情链接新增 -->
+		<action name="linkInsert" class="linkAction" method="linkInsert">
+			<result name="success" type="redirectAction">linkListPaging</result>
+		</action>
+		
+		<!-- 友情链接删除 -->
+		<action name="linkDelete" class="linkAction" method="linkDelete">
+			<result name="success" type="redirectAction">linkListPaging</result>
+		</action>
+		
+		<!-- 友情链接修改编辑 -->
+		<action name="linkUpdateEdit" class="linkAction" method="linkUpdateEdit">
+			<result name="success">/WEB-INF/admin/link_updateEdit.jsp</result>
+		</action>
+		
+		<!-- 友情链接修改 -->
+		<action name="linkUpdate" class="linkAction" method="linkUpdate">
+			<result name="success" type="redirectAction">linkListPaging</result>
+		</action>
+		
+		<!-- 友情链接查询 -->
+		<action name="linkQuery" class="linkAction" method="linkQuery">
+			<result name="success">/WEB-INF/admin/link_query.jsp</result>
+		</action>
+		
+		<!-- 公告显示 -->
+		<action name="noticeDisplay" class="noticeAction" method="noticeDisplay">
+			<result name="success">/WEB-INF/admin/notice_display.jsp</result>
+		</action>
+		
+		<!-- 公告修改编辑 -->
+		<action name="noticeUpdateEdit" class="noticeAction" method="noticeUpdateEdit">
+			<result name="success">/WEB-INF/admin/notice_updateEdit.jsp</result>
+		</action>
+		
+		<!-- 公告修改 -->
+		<action name="noticeUpdate" class="noticeAction" method="noticeUpdate">
+			<result name="success" type="redirectAction">noticeDisplay</result>
+		</action>
+		
+		<!-- 论坛会员分页列表 -->
+		<action name="userListPaging" class="userAction" method="userListPaging">
+			<result name="success">/WEB-INF/admin/user_list.jsp</result>
+		</action>
+		
+		<!-- 论坛会员新增编辑 -->
+		<action name="userInsertEdit" class="userAction" method="userInsertEdit">
+			<result name="success">/WEB-INF/admin/user_insertEdit.jsp</result>
+		</action>
+		
+		<!-- 论坛会员新增 -->
+		<action name="userInsert" class="userAction" method="userInsert">
+			<result name="success" type="redirectAction">userListPaging</result>
+		</action>
+		
+		<!-- 论坛会员删除 -->
+		<action name="userDelete" class="userAction" method="userDelete">
+			<result name="success" type="redirectAction">userListPaging</result>
+		</action>
+		
+		<!-- 论坛会员修改编辑 -->
+		<action name="userUpdateEdit" class="userAction" method="userUpdateEdit">
+			<result name="success">/WEB-INF/admin/user_updateEdit.jsp</result>
+		</action>
+		
+		<!-- 论坛会员修改 -->
+		<action name="userUpdate" class="userAction" method="userUpdate">
+			<result name="success" type="redirectAction">userListPaging</result>
+		</action>
+		
+		<!-- 论坛会员查询 -->
+		<action name="userQuery" class="userAction" method="userQuery">
+			<result name="success">/WEB-INF/admin/user_query.jsp</result>
+		</action>
+
+		<!-- 跳转网站首页 -->
+		<action name="index" class="indexAction" method="index">
+			<result name="success">/index.jsp</result>
+		</action>
+		
+		<!-- 课程 -->
+		<action name="course" class="indexAction" method="course">
+			<result name="success">/WEB-INF/home/course.jsp</result>
+		</action>
+		
+		<!-- 公告 -->
+		<action name="notice" class="noticeAction" method="notice">
+			<result name="success">/WEB-INF/home/notice.jsp</result>
+		</action>
+		
+		<!-- 活动 -->
+		<action name="activity" class="indexAction" method="activity">
+			<result name="success">/WEB-INF/home/activity.jsp</result>
+		</action>
+		
+		<!-- 联系我们 -->
+		<action name="contact" class="indexAction" method="contact">
+			<result name="success">/WEB-INF/home/contact.jsp</result>
+		</action>
+		
+		<!-- 论坛会员注册 -->
+		<action name="register" class="userAction" method="register">
+			<result name="success" type="redirectAction">index</result>
+		</action>
+		
+		<!-- 论坛会员登录 -->
+		<action name="login" class="userAction" method="login">
+			<result name="success" type="redirectAction">index</result>
+		</action>
+		
+		<!-- 论坛会员注销 -->
+		<action name="loginOut" class="userAction" method="loginOut">
+			<result name="success" type="redirectAction">index</result>
+		</action>
+		
+		<!-- 论坛会员我的主页 -->
+		<action name="userCenter" class="userAction" method="userCenter">
+			<result name="success">/WEB-INF/home/user_center.jsp</result>
+		</action>
+		
+		<!-- 账户设置编辑操作 -->
+		<action name="accountUpdateEdit" class="userAction" method="accountUpdateEdit">
+			<result name="success">/WEB-INF/home/account.jsp</result>
+		</action>
+		
+		<!-- 账户设置编辑 -->
+		<action name="accountUpdate" class="userAction" method="accountUpdate">
+			<result name="success" type="redirectAction">userCenter</result>
+		</action>
+		
+		<!-- 我的帖子页面 -->
+		<action name="userTopic" class="topicAction" method="userTopic">
+			<result name="success">/WEB-INF/home/user_topic.jsp</result>
+		</action>
+		
+		<!-- 帖子添加编辑 -->
+		<action name="topicAddEdit" class="topicAction" method="topicAddEdit">
+			<result name="success">/WEB-INF/home/topic.jsp</result>
+		</action>
+		
+		<!-- 帖子添加 -->
+		<action name="topicAdd" class="topicAction" method="topicAdd">
+			<result name="success" type="redirectAction">userTopic</result>
+		</action>
+		
+		<!-- 帖子限制显示 -->
+		<action name="topicLimitLeft" class="topicAction" method="topicLimitLeft">
+			<result name="success">/WEB-INF/home/topic_limit_left.jsp</result>
+		</action>
+		
+		<!-- 帖子限制显示 -->
+		<action name="topicLimitRight" class="topicAction" method="topicLimitRight">
+			<result name="success">/WEB-INF/home/topic_limit_right.jsp</result>
+		</action>
+		
+		<!-- 帖子限制显示 -->
+		<action name="topicLimitTop" class="topicAction" method="topicLimitTop">
+			<result name="success">/WEB-INF/home/topic_limit_top.jsp</result>
+		</action>
+		
+		<!-- 我的帖子页显示-->
+		<action name="topicMyself" class="topicAction" method="topicMyself">
+			<result name="success">/WEB-INF/home/topic_myself.jsp</result>
+		</action>
+		
+		<!-- 帖子分页列表 -->
+		<action name="topicListPaging" class="topicAction" method="topicListPaging">
+			<result name="success">/WEB-INF/admin/topic_list.jsp</result>
+		</action>
+		
+		<!-- 帖子删除 -->
+		<action name="topicDelete" class="topicAction" method="topicDelete">
+			<result name="success" type="redirectAction">topicListPaging</result>
+		</action>
+		
+		<!-- 帖子详情  以及回复-->
+		<action name="topicDetail" class="topicAction" method="topicDetail">
+			<result name="success">/WEB-INF/home/topic_detail.jsp</result>
+		</action>
+		
+		<!-- 帖子分页列表 -->
+		<action name="topicAllPaging" class="topicAction" method="topicAllPaging">
+			<result name="success">/WEB-INF/home/topic_all.jsp</result>
+		</action>
+		
+		<!-- 达人推荐-->
+		<action name="star" class="userAction" method="star">
+			<result name="success">/WEB-INF/home/star.jsp</result>
+		</action>
+		
+		<!-- 达人关注 -->
+		<action name="starAdd" class="userAction" method="starAdd">
+			<result name="success" type="redirectAction">index</result>
+		</action>
+		
+		<!-- 我关注的达人-->
+		<action name="starMyself" class="userAction" method="starMyself">
+			<result name="success">/WEB-INF/home/star_my.jsp</result>
+		</action>
+		
+		<!-- 水贴回复新增 -->
+		<action name="waterAdd" class="topicAction" method="waterAdd">
+			<result name="success" type="redirectAction">topicDetail</result>
+		</action>
+		
+		<!-- 灌水回复分页列表 -->
+		<action name="waterListPaging" class="topicAction" method="waterListPaging">
+			<result name="success">/WEB-INF/admin/water_list.jsp</result>
+		</action>
+		
+
+		<!-- / -->
+	</package>
+</struts>    
